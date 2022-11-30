@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, ViewEncapsulation, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit,Input, ViewEncapsulation, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild,ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,9 +6,19 @@ import { Component, OnInit,Input, ViewEncapsulation, OnChanges, SimpleChanges, D
   styleUrls: ['./server-element.component.css'],
   encapsulation:ViewEncapsulation.ShadowDom
 })
-export class ServerElementComponent implements OnInit,OnChanges,DoCheck ,AfterContentInit, AfterContentChecked,AfterViewInit,AfterViewChecked,OnDestroy{
+export class ServerElementComponent implements 
+OnInit,
+OnChanges,
+DoCheck ,
+AfterContentInit, 
+AfterContentChecked,
+AfterViewInit,
+AfterViewChecked,
+OnDestroy
+{
   @Input('srvElement') element :{type:string,name:string,description:string};
   @Input () name:string;
+  @ViewChild('heading',{static:true}) header:ElementRef;
 
   constructor() { 
     console.log('constructor called');
@@ -21,6 +31,7 @@ export class ServerElementComponent implements OnInit,OnChanges,DoCheck ,AfterCo
   }
   ngOnInit(): void {
     console.log('ngOnInit is called');
+    console.log(this.header.nativeElement.textContent)
   }
 
   ngDoCheck(): void {   //called all the tims, when angular checks for any changes.
